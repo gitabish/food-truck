@@ -382,9 +382,9 @@ export default function App() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
           {[
             "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=400&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1626200419188-f56deebbb25c?q=80&w=400&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1590165482129-1b8b27698780?q=80&w=400&auto=format&fit=crop",
             "https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=400&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1594220556138-04ff97db2ea9?q=80&w=400&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1505253668822-42074d58a7c6?q=80&w=400&auto=format&fit=crop",
           ].map((img, idx) => (
             <motion.a
               key={idx}
