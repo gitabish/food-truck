@@ -83,13 +83,21 @@ export default function App() {
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3 cursor-pointer"
+          className="flex items-center gap-3 cursor-pointer group"
           onClick={() => scrollTo('home')}
         >
-          <div className="w-12 h-12 bg-[#2D1B08] rounded-full flex items-center justify-center">
-            <Truck className="w-6 h-6 text-[#FAA307]" />
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-full overflow-hidden border-2 sm:border-4 border-[#2D1B08] shadow-[2px_2px_0px_0px_rgba(45,27,8,1)] sm:shadow-[4px_4px_0px_0px_rgba(45,27,8,1)] flex items-center justify-center group-hover:scale-105 transition-transform">
+            <img 
+              src="/logo.jpg" 
+              alt="The Spudwala Logo" 
+              className="w-full h-full object-cover" 
+              onError={(e) => { 
+                e.currentTarget.style.display = "none";
+                e.currentTarget.parentElement!.innerHTML = '<span class="font-black text-[#2D1B08] text-xs text-center p-1 leading-tight">LOGO<br/>HERE</span>';
+              }} 
+            />
           </div>
-          <div className="flex flex-col leading-none">
+          <div className="flex flex-col leading-none hidden sm:flex">
             <span className="font-black text-2xl tracking-tighter text-[#2D1B08] uppercase">The Spudwala</span>
           </div>
         </motion.div>
@@ -248,13 +256,13 @@ export default function App() {
                viewport={{ once: true }}
                transition={{ delay: idx * 0.1 }}
                whileHover={{ y: -8 }}
-               className={`bg-white p-6 rounded-3xl border-4 ${item.color} ${item.shadow} flex gap-6 items-center group transition-transform`}
+               className={`bg-white p-4 sm:p-6 rounded-3xl border-4 ${item.color} ${item.shadow} flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center group transition-transform`}
             >
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden flex-shrink-0 border-4 border-[#2D1B08]">
+              <div className="w-full h-48 sm:w-32 sm:h-32 rounded-2xl overflow-hidden flex-shrink-0 border-4 border-[#2D1B08]">
                 <img src={item.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={item.name} />
               </div>
-              <div className="flex-grow">
-                <div className="flex justify-between items-start mb-2">
+              <div className="flex-grow min-w-0 w-full">
+                <div className="flex justify-between items-start mb-2 gap-2">
                   <h4 className="font-black uppercase text-xl leading-tight text-[#2D1B08]">{item.name}</h4>
                   <span className={`font-black text-lg border-b-2 ${item.priceColor}`}>{item.price}</span>
                 </div>
@@ -351,6 +359,59 @@ export default function App() {
               Open Menu
             </motion.button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Instagram Feed */}
+      <section className="py-24 px-8 max-w-[1400px] mx-auto overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12"
+        >
+          <h2 className="text-[40px] md:text-[56px] leading-none font-black uppercase text-[#2D1B08] text-center md:text-left">
+            Follow The <span className="text-[#FAA307]">Spud</span>
+          </h2>
+          <a href="#" className="flex items-center gap-3 text-sm md:text-lg font-bold uppercase tracking-wider text-[#E85D04] hover:text-[#2D1B08] transition-colors border-4 border-transparent hover:border-[#2D1B08] px-6 py-3 rounded-full hover:bg-white group">
+            <Instagram className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
+            @thespudwala
+          </a>
+        </motion.div>
+        
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
+          {[
+            "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=400&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1626200419188-f56deebbb25c?q=80&w=400&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=400&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1594220556138-04ff97db2ea9?q=80&w=400&auto=format&fit=crop",
+          ].map((img, idx) => (
+            <motion.a
+              key={idx}
+              href="#"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ scale: 1.05, rotate: idx % 2 === 0 ? 2 : -2, zIndex: 10 }}
+              className="relative aspect-square rounded-[32px] overflow-hidden border-4 border-[#2D1B08] shadow-[8px_8px_0px_0px_rgba(250,163,7,1)] group block bg-white"
+            >
+              <img src={img} alt="Instagram post" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-[#2D1B08]/0 group-hover:bg-[#2D1B08]/40 transition-colors duration-300 flex items-center justify-center">
+                <Instagram className="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-50 group-hover:scale-100" />
+              </div>
+            </motion.a>
+          ))}
+        </div>
+        
+        <div className="flex justify-center">
+          <motion.button 
+            whileHover={{ y: -4, boxShadow: "8px 8px 0px 0px rgba(45,27,8,1)" }}
+            whileTap={{ y: 2, boxShadow: "none" }}
+            className="bg-[#FAA307] text-[#2D1B08] px-10 py-5 rounded-2xl font-black uppercase text-lg shadow-[8px_8px_0px_0px_rgba(45,27,8,1)] border-4 border-[#2D1B08] transition-all hover:bg-white flex items-center gap-3"
+          >
+            <span>View More</span>
+          </motion.button>
         </div>
       </section>
 
